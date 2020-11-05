@@ -18,6 +18,8 @@ from keras import backend as K
 from keras.utils.data_utils import get_file
 from keras.utils.layer_utils import convert_all_kernels_in_model
 
+tf.compat.v1.disable_eager_execution()
+
 # from tensorflow.keras.models import Model
 # from tensorflow.keras.layers import Input
 # from tensorflow.keras.layers import Convolution2D, AveragePooling2D, MaxPooling2D
@@ -528,8 +530,8 @@ for i in range(len(feature_layers) - 1):
 loss = loss + total_variation_weight * total_variation_loss(combination_image)
 
 # get the gradients of the generated image wrt the loss
-# grads = K.gradients(loss, combination_image)
-grads = tf.GradientTape(loss, combination_image)
+grads = K.gradients(loss, combination_image)
+# grads = tf.GradientTape(loss, combination_image)
 
 
 
